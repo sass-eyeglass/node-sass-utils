@@ -104,3 +104,8 @@ Returns true if the instance is a sass null.
 Returns a javascript string that is the instance as represented in a
 Sass file.
 
+## Installation
+
+```
+$ npm install --save node-sass-utils
+```
