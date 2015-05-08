@@ -7,7 +7,7 @@ passes to javascript functions that are exposed as sass functions.
 
 ```js
 var sass = require("node-sass");
-var sassUtils = require("node-sass-utils");
+var sassUtils = require("node-sass-utils")(sass);
 
 // standard invocation: methods on the sassUtils object
 function mySassFunction(arg1) {
@@ -25,9 +25,9 @@ of the sass types. The sass utilities can infect the Sass types.
 
 ```js
 var sass = require("node-sass");
-var sassUtils = require("node-sass-utils");
+var sassUtils = require("node-sass-utils")(sass);
 
-sassUtils.infect(sass.types);
+sassUtils.infect();
 
 function mySassFunction(arg1) {
   console.log(arg1.sassString());
@@ -40,12 +40,12 @@ If you really need to, you can disinfect the sass types:
 
 ```js
 var sass = require("node-sass");
-var sassUtils = require("node-sass-utils");
+var sassUtils = require("node-sass-utils")(sass);
 
 function mySassFunction(arg1) {
-  sassUtils.infect(sass.types);
+  sassUtils.infect();
   console.log(arg1.sassString());
-  sassUtils.disinfect(sass.types);
+  sassUtils.disinfect();
   return arg1;
 }
 ```

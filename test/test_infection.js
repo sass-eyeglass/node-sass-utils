@@ -6,10 +6,10 @@ var sassUtils = require("../lib")(sass);
 
 describe("sass utils infection of types", function () {
   before(function() {
-    sassUtils.infect(sass.types);
+    sassUtils.infect();
   });
   after(function() {
-    sassUtils.disinfect(sass.types);
+    sassUtils.disinfect();
   });
   it("null.sassString()", function (done) {
     assert.equal("null", sass.types.Null().sassString());
