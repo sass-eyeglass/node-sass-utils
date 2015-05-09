@@ -86,6 +86,12 @@ Like `sassUtils.typeOf` except it takes a sass value constructor
 Returns a new sass string after unquoting it. Returns a sass null if passed
 a sass null. All other types raise an error.
 
+### `new sassUtils.SassMap()`
+
+Returns a new javascript Map that is capable of maping sass objects as
+keys to sass objects as values. The API of a sass map is identical to the
+[Javascript Map][map_type] builtin type.
+
 ## Instance API
 
 These methods are only available after calling
@@ -109,3 +115,5 @@ Sass file.
 ```
 $ npm install --save node-sass-utils
 ```
+
+[map_type]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
