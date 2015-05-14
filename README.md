@@ -86,7 +86,7 @@ Like `sassUtils.typeOf` except it takes a sass value constructor
 Returns a new sass string after unquoting it. Returns a sass null if passed
 a sass null. All other types raise an error.
 
-### `new sassUtils.SassMap([sassMap])`
+### `new sassUtils.SassJsMap([sassMap])`
 
 Returns a new javascript Map that is capable of maping sass objects as
 keys to sass objects as values. The API of a sass map is identical to the
