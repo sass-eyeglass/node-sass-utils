@@ -86,6 +86,94 @@ Like `sassUtils.typeOf` except it takes a sass value constructor
 Returns a new sass string after unquoting it. Returns a sass null if passed
 a sass null. All other types raise an error.
 
+### `sassUtils.castToSass(jsValue)`
+
+Returns a corresponding sass value for the given javascript value.
+
+* `undefined` - cast to sass `null`.
+* `null` - cast to sass `null`.
+* `true` - cast to sass `true`.
+* `false` - cast to sass `false`.
+* number - cast to a unitless sass number.
+* string - cast to unquoted sass string.
+* array - cast to sass comma delimited list (set array.separator to
+  false to cast to a space delimited list)
+* `SassJsMap` - cast to sass map.
+* `SassDimension` - cast to sass number.
+* object - cast to sass map where the keys are strings and the values
+  are cast recursively.
+* `function` - cannot be cast.
+
+### `sassUtils.castToJs(jsValue)`
+
+The following Sass types can be coerced:
+
+* `null` - Sass null is converted to JS null. JS undefined will also be
+converted to Sass null.
+* `boolean` - Sass boolean values are converted to and from JS Booleans.
+* `string` - converted to a javascript string.
+* `number` - converted to a SassDimension.
+* `map` - Sass Maps are converted to and from SassJsMap objects.
+* `list` - Sass Lists are converted to and from JS Arrays. The sass
+  lists are always comma delimited when coerced from JS.
+
+
+### `class SassDimension`
+
+#### Properties:
+
+  - `value`: The numeric part of a dimensional value
+  - `numeratorUnits`: Array of units in the numerator.
+  - `denominatorUnits`: Array of units in the denominator.
+
+#### Constructor:
+
+  -` new SassDimension(10, "px")`: Most commonly there is just a
+    single unit in the numerator.
+  - `new SassDimension(10, "px/s")`: Units can be passed in the same
+    form as they are returned from the unitStr() method.
+  - `new SassDimension(10, "px", "s")`: Single numerator and
+    denominator units can be passed as strings instead of arrays
+    of one unit.
+  - `new SassDimension(10, ["px"], ["s"])`: numerator and denominator
+    units can be passed as arrays where each index is a single units.
+
+#### Methods:
+  * Arithmetic Methods:
+    - `d1.add(d2`): computes the sum d1 + d2. The units of d1 and d2
+      must be the same or convertable. The result is returned using
+      the units of d1.
+    - `d1.subtract(d2)`: computes the difference d1 - d2. The units of d1 and d2
+      must be the same or convertable. The result is returned using
+      the units of d1.
+    - `d1.multiply(d2)`: computes the product d1 * d2. The numerator
+      units are combined as are the denominator units.
+    - `d1.divide(d2)`: computes the quotient d1 / d2. The numerator
+      units of d1 are combined with the denominatorUnits of d2 and
+      the denominator units of d1 and combined with the numerator
+      units of d2.
+  * Comparison Methods:
+    - `d1.compareTo(d2)`: return positive if d1 is greater than d2,
+      negative if d1 is less than d2, and zero if equal.
+    - `d1.lt(d2)`: returns true when d1 is strictly less than d2. The
+      units of d1 and d2 must be the same or comparable.
+    - `d1.lte(d2)`: returns true when d1 is less than or equal to d2.
+      The units of d1 and d2 must be the same or comparable.
+    - `d1.gt(d2)`: returns true when d1 is strictly greater than d2.
+      The units of d1 and d2 must be the same or comparable.
+    - `d1.gte(d2)`: returns true when d1 is greater than or equal to
+      d2. The units of d1 and d2 must be the same or comparable.
+    - `d1.eq(d2)`: returns true when d1 is greater than or equal to
+      d2. The units of d1 and d2 must be the same or comparable.
+  * Misc Methods:
+    - `d.unitStr()`: output the units of this number in the form 
+      n1*n2(*...)/d1*d2(*...)
+    - `d.sassString()`: Returns a sass representation of this number.
+    - `d.convertTo(numeratorUnits, denominatorUnits)`: returns a new
+      number converted to the given units or throws an error if
+      they cannot be converted. This method can accept any of the
+      same inputs that the constructor can be passed for units.
+
 ### `new sassUtils.SassJsMap([sassMap])`
 
 Returns a new javascript Map that is capable of maping sass objects as
@@ -116,6 +204,30 @@ Additional Methods:
   typed in a sass file.
 
 * `map.typeOf()` - returns `"map"`.
+
+Coercion: 
+
+A sassJsMap provides a `coerce` property that automatically coerces
+arguments and their return values.
+
+The following Sass types can be coerced:
+
+* `null` - Sass null is converted to JS null. JS undefined will also be
+converted to Sass null.
+* `boolean` - Sass boolean values are converted to and from JS Booleans.
+* `map` - Sass Maps are converted to and from SassJsMap objects.
+* `list` - Sass Lists are converted to and from JS Arrays. The sass
+  lists are always comma delimited when coerced from JS.
+
+
+
+* `map.coerce.get()` - allows you to get string keys without creating a
+  sass objects and then unboxing them. This only works for the following
+  sass types
+  sassJsMaps.
+* `map.coerce.set()` - string keys and values are automatically converted
+  to sass strings.
+
 
 **Note:** It is highly discouraged to use SassJsMap values as a key in
  another map. The behavior is very unpredictable if the map is mutated.

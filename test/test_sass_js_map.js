@@ -176,4 +176,23 @@ describe("sass js map", function () {
     assert.equal(sassUtils.sassString(map1.toSassMap()), "(top-level: (a: 2, b: 3))");
     done();
   });
+
+  it("can coerce for the get method", function() {
+    var map = sass.types.Map(1);
+    var submap = sass.types.Map(1);
+    submap.setKey(0, sass.types.String("two"));
+    submap.setValue(0, sass.types.Number(3, "px"));
+    map.setKey(0, sass.types.String("one"));
+    map.setValue(0, submap);
+    var jsmap = new sassUtils.SassJsMap(map);
+    var t = jsmap.coerce.get("one");
+    assert.equal(3, t.coerce.get("two").value);
+  });
+
+  it("can coerce for the set method", function() {
+    var map = new sassUtils.SassJsMap();
+    map.coerce.set("foo", "bar");
+    var value = map.get(sass.types.String("foo"));
+    assert.equal("bar", value.getValue());
+  });
 });
