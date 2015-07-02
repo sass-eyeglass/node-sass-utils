@@ -86,6 +86,15 @@ Like `sassUtils.typeOf` except it takes a sass value constructor
 Returns a new sass string after unquoting it. Returns a sass null if passed
 a sass null. All other types raise an error.
 
+### `sassUtils.isEmptyMap(value)`
+
+Returns true if the value is an empty map or an empty list.
+
+### `sassUtils.handleEmptyMap(value)`
+
+Returns an empty map if passed an empty list. Otherwise, returns the
+value passed in.
+
 ### `sassUtils.castToSass(jsValue)`
 
 Returns a corresponding sass value for the given javascript value.
