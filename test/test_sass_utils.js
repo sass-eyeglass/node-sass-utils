@@ -113,6 +113,18 @@ describe("sass utils clean", function () {
     assert.equal(false, sassUtils.isFalsy(sass.types.Map(0)));
     done();
   });
+  it("handles empty maps", function(done) {
+    var emptyList = sass.types.List(0);
+    var emptyMap = sass.types.List(0);
+    assert(sassUtils.isEmptyMap(emptyList));
+    assert(sassUtils.isEmptyMap(emptyMap));
+    assert(sassUtils.isType(emptyList, "map"));
+    assert(sassUtils.isType(emptyMap, "map"));
+    sassUtils.assertType(emptyList, "map");
+    sassUtils.assertType(emptyMap, "map");
+    assert.equal("map", sassUtils.typeOf(sassUtils.handleEmptyMap(emptyList)));
+    done();
+  });
   // it("can convert to and from js maps", function(done) {
   //   var map = new Map();
   //   map.set(sass.types.String("foo"), sass.types.Color(0, 0, 0));
