@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/sass-eyeglass/node-sass-utils",
   "devDependencies": {
-    "eslint": "^0.14.1",
+    "eslint": "^4.18.2",
     "eyeglass-dev-eslint": "^1.0.1",
     "grunt": "^0.4.5",
     "grunt-release": "^0.12.0",
