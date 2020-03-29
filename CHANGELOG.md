@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.3
+
+* Adds support for dart-sass.
+
 ## 1.1.0
 
 Empty maps appear as empty lists (the two are indistiguishable in
