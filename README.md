@@ -3,6 +3,8 @@
 This package provides helpers for working with the Sass values that `node-sass`
 passes to javascript functions that are exposed as sass functions.
 
+Because the `dart-sass` (aka `sass` on npm) implementation mostly adheres to the `node-sass` implementation, this package has been tested to work with both.
+
 ## Basic Usage
 
 ```js
@@ -175,7 +177,7 @@ converted to Sass null.
     - `d1.eq(d2)`: returns true when d1 is greater than or equal to
       d2. The units of d1 and d2 must be the same or comparable.
   * Misc Methods:
-    - `d.unitStr()`: output the units of this number in the form 
+    - `d.unitStr()`: output the units of this number in the form
       n1*n2(*...)/d1*d2(*...)
     - `d.sassString()`: Returns a sass representation of this number.
     - `d.convertTo(numeratorUnits, denominatorUnits)`: returns a new
@@ -214,7 +216,7 @@ Additional Methods:
 
 * `map.typeOf()` - returns `"map"`.
 
-Coercion: 
+Coercion:
 
 A sassJsMap provides a `coerce` property that automatically coerces
 arguments and their return values.
@@ -249,8 +251,8 @@ var someSassColorLibrary = require("some-color-library");
 var sassUtils = require("node-sass-utils")(sass);
 function someCustomSassFunction(sassMap) {
   var map = new sassUtils.SassJsMap();
-  var color = map.get(sass.types.String("color"));
-  map.set(sass.types.String("background-color"),
+  var color = map.get(new sass.types.String("color"));
+  map.set(new sass.types.String("background-color"),
           someSassColorLibrary.darken(color, 0.20))
   return map.toSassMap();
 }
