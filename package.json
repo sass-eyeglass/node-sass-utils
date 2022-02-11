@@ -17,15 +17,18 @@
     "url": "https://github.com/sass-eyeglass/node-sass-utils/issues"
   },
   "engines": {
-    "node": ">= 0.12"
+    "node": ">= 12.13"
   },
   "homepage": "https://github.com/sass-eyeglass/node-sass-utils",
+  "resolutions": {
+    "graceful-fs": "^4.2.9"
+  },
   "devDependencies": {
     "eslint": "^0.14.1",
     "eyeglass-dev-eslint": "^1.0.1",
     "mocha": "^9.2.0",
     "node-sass": "^4.0.0",
-    "sass": "^1.26.3",
+    "sass": "^1.46.0",
     "should": ">= 0.0.1"
   },
   "volta": {
