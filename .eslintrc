@@ -1,0 +1,9 @@
+{
+    "extends": "eyeglass-dev-eslint",
+    "rules": {
+        "no-undef": "off",
+        "global-strict": "off",
+        "quotes": "off",
+        "no-console": "off"
+    }
+}
