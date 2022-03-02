@@ -20,9 +20,6 @@
     "node": ">= 12.13"
   },
   "homepage": "https://github.com/sass-eyeglass/node-sass-utils",
-  "resolutions": {
-    "graceful-fs": "^4.2.9"
-  },
   "devDependencies": {
     "eslint": "^0.14.1",
     "eyeglass-dev-eslint": "^1.0.1",
