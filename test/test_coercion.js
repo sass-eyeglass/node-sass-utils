@@ -48,7 +48,7 @@ describe("sass utils coercion", function () {
         done();
       });
 
-      it("casts maps", function (done) {
+    it("casts maps", function (done) {
         var jsMap = new sassUtils.SassJsMap();
         jsMap.coerce.set("foo", false);
         assert.equal(jsMap.coerce.get("foo"), false);

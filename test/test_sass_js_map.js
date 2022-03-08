@@ -49,6 +49,38 @@ describe("sass js map", function () {
         assert(false, "did not raise");
       });
 
+      it("allow sass.types.Null.NULL value", function (done) {
+        var map = new sassUtils.SassJsMap();
+        var key = new sass.types.String("someKey");
+        map.set(key, sass.types.Null.NULL);
+        assert.equal(1, map.size);
+        done();
+      });
+
+      it("allow sass.types.Null.NULL key", function (done) {
+        var map = new sassUtils.SassJsMap();
+        var value = new sass.types.String("someValue");
+        map.set(sass.types.Null.NULL, value);
+        assert.equal(1, map.size);
+        done();
+      });
+
+      it("allows sass.types.Boolean.TRUE", function (done) {
+        var map = new sassUtils.SassJsMap();
+        var key = new sass.types.String("someKey");
+        map.set(key, sass.types.Boolean.TRUE);
+        assert.equal(1, map.size);
+        done();
+      });
+
+      it("allows sass.types.Boolean.FALSE", function (done) {
+        var map = new sassUtils.SassJsMap();
+        var key = new sass.types.String("someKey");
+        map.set(key, sass.types.Boolean.FALSE);
+        assert.equal(1, map.size);
+        done();
+      });
+
       it("has a length", function (done) {
         var map = new sassUtils.SassJsMap();
         assert.equal(0, map.size);
